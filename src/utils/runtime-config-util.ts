@@ -18,8 +18,15 @@
 import {RuntimeConfig} from '../app/core/models/RuntimeConfig';
 
 export class RuntimeConfigUtil {
-  /** Returns the runtime config from global variable. */
+  private static runtimeConfig: RuntimeConfig;
+
+  static async loadRuntimeConfig(): Promise<void> {
+    const response = await fetch('/config');
+    RuntimeConfigUtil.runtimeConfig = await response.json();
+  }
+
+  /** Returns the runtime config from the loaded config. */
   static getRuntimeConfig(): RuntimeConfig {
-    return (window as any)['runtimeConfig'] as RuntimeConfig;
+    return RuntimeConfigUtil.runtimeConfig;
   }
 }

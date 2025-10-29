@@ -212,6 +212,10 @@
         </div>
         }
       </div>
+      <div class="feedback-actions">
+        <span class="material-symbols-outlined" (click)="thumbUp.emit(message)">thumb_up</span>
+        <span class="material-symbols-outlined" (click)="thumbDown.emit(message)">thumb_down</span>
+      </div>
       }
     </mat-card>
     } @if (message.functionCall) {

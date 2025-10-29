@@ -105,6 +105,8 @@ export class ChatPanelComponent implements OnChanges, AfterViewInit {
   @Output() readonly updateState = new EventEmitter<void>();
   @Output() readonly toggleAudioRecording = new EventEmitter<void>();
   @Output() readonly toggleVideoRecording = new EventEmitter<void>();
+  @Output() readonly thumbUp = new EventEmitter<any>();
+  @Output() readonly thumbDown = new EventEmitter<any>();
 
   @ViewChild('videoContainer', {read: ElementRef}) videoContainer!: ElementRef;
   @ViewChild('autoScroll') scrollContainer!: ElementRef;

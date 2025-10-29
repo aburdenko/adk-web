@@ -48,6 +48,7 @@ import {ARTIFACT_SERVICE} from '../../core/services/interfaces/artifact';
 import {DOWNLOAD_SERVICE} from '../../core/services/interfaces/download';
 import {EVAL_SERVICE} from '../../core/services/interfaces/eval';
 import {EVENT_SERVICE} from '../../core/services/interfaces/event';
+import {FEEDBACK_SERVICE} from '../../core/services/interfaces/feedback';
 import {FEATURE_FLAG_SERVICE} from '../../core/services/interfaces/feature-flag';
 import {GRAPH_SERVICE} from '../../core/services/interfaces/graph';
 import {LOCAL_FILE_SERVICE} from '../../core/services/interfaces/localfile';
@@ -147,6 +148,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly downloadService = inject(DOWNLOAD_SERVICE);
   private readonly evalService = inject(EVAL_SERVICE);
   private readonly eventService = inject(EVENT_SERVICE);
+  private readonly feedbackService = inject(FEEDBACK_SERVICE);
   private readonly featureFlagService = inject(FEATURE_FLAG_SERVICE);
   private readonly graphService = inject(GRAPH_SERVICE);
   private readonly localFileService = inject(LOCAL_FILE_SERVICE);
@@ -280,6 +282,28 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   hoveredEventMessageIndices: number[] = [];
 
   constructor() {}
+
+  onThumbUp(message: any) {
+    const feedback = {
+      message,
+      rating: 'thumb_up',
+      sessionId: this.sessionId,
+      userId: this.userId,
+      appName: this.appName,
+    };
+    this.feedbackService.sendFeedback(feedback).subscribe();
+  }
+
+  onThumbDown(message: any) {
+    const feedback = {
+      message,
+      rating: 'thumb_down',
+      sessionId: this.sessionId,
+      userId: this.userId,
+      appName: this.appName,
+    };
+    this.feedbackService.sendFeedback(feedback).subscribe();
+  }
 
   ngOnInit(): void {
     this.syncSelectedAppFromUrl();

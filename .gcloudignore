@@ -1,0 +1,8 @@
+.gcloudignore
+.gitignore
+.vscode/
+node_modules/
+.angular/
+dist/
+.venv/
+.env
